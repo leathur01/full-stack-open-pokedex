@@ -47,7 +47,7 @@ jobs:
         with:
           severity: info
           text: A new version of Pokedex deployed
-          description: to https://full-stack-open-pokedex-arikainen.fly.dev by ${{ github.event.commits[0].committer.username }}
+          description: to https://full-stack-open-pokedex-rze0.onrender.com/ by ${{ github.event.commits[0].committer.username }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Deployment failure
