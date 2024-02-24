@@ -14,7 +14,7 @@ const useApi = (url, mapResults = (result) => result) => {
       .finally(() => setIsLoading(false))
   }, [url])
 
-  return { data, isLoading, error }
+  return { data, isLoading, error };
 }
 
 export { useApi }
