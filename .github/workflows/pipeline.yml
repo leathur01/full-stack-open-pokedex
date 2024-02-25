@@ -71,6 +71,26 @@ jobs:
           # Retry all errors, including 404. This option might trigger curl upgrade.
           retry-all: false 
 
+      - name: Periodic health check success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          severity: info
+          text: Ping succeed
+          description: https://full-stack-open-pokedex-rze0.onrender.com/health responded
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
+      - name: Periodic health check failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          color: '#aa0000'
+          text: Ping failed
+          description: no response from https://full-stack-open-pokedex-rze0.onrender.com/health
+          details: ''
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
