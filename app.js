@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express()
-let count = 0
 
 // get the port from env variable
 const PORT = process.env.PORT || 5000
@@ -12,10 +11,7 @@ app.get('/version', (req, res) => {
 })
 
 app.get('/health', (req, res) => {
-  count = count + 1
-  console.log
-  res.status(404).send('Sorry, cannot find that!')
-  // res.send('ok')
+  res.send('ok')
 })
 
 app.listen(PORT, () => {
