@@ -15,7 +15,7 @@ app.get('/health', (req, res) => {
   count = count + 1
   console.log
   // res.send('ok')
-  res.status(404).send(`Sorry, can't find that!`)
+  res.status(404).send('Sorry, cannot find that!')
 })
 
 app.listen(PORT, () => {
