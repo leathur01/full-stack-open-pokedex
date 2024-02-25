@@ -59,6 +59,18 @@ jobs:
           description: commit ${{ github.event.commits[0].url }} by ${{ github.event.commits[0].committer.username }} broke the build :(
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@v4
+        with:
+          # Check the following URLs one by one sequentially
+          url: https://full-stack-open-pokedex-rze0.onrender.com/health
+          # Fail this action after this many failed attempts
+          max-attempts: 3 
+          # Delay between retries
+          retry-delay: 5s 
+          # Retry all errors, including 404. This option might trigger curl upgrade.
+          retry-all: false 
+
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
