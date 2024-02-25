@@ -2,7 +2,7 @@ name: Periodic Health Check
   
 on:
   schedule:
-  - cron:  '*/15 * * * *'
+  - cron:  '*/5 * * * *'
 
 jobs:
   periodic_health_check:
@@ -12,29 +12,5 @@ jobs:
         uses: jtalk/url-health-check-action@v1.2
         with:
           url: https://fullstack-open-part11-pokedex.herokuapp.com/
-          # Follow redirects, or just report success on 3xx status codes
-          follow-redirect: no # Optional, defaults to "no"
-          # Fail this action after this many failed attempts
-          max-attempts: 3 # Optional, defaults to 1
-          # Delay between retries
-          retry-delay: 5s # Optional, only applicable to max-attempts > 1
-
-      - name: Periodic health check success
-        uses: rjstone/discord-webhook-notify@v1
-        if: success()
-        with:
-            severity: info
-            text: Ping succeed
-            description: https://full-stack-open-pokedex-rze0.onrender.com/health responded
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-
-      - name: Periodic health check failure
-        uses: rjstone/discord-webhook-notify@v1
-        if: failure()
-        with:
-            severity: error
-            color: '#aa0000'
-            text: Ping failed
-            description: no response from https://full-stack-open-pokedex-rze0.onrender.com/health
-            details: ''
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          max-attempts: 3
+          retry-delay: 5s 
